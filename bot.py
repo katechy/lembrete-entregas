@@ -3,19 +3,34 @@ from discord.ext import commands, tasks
 import sqlite3
 from datetime import datetime, date
 import os
+from flask import Flask
+import threading
 
-# Configurações iniciais
+# ========== SERVIDOR WEB PARA O RENDER ==========
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "🤖 Bot de Entregas da Karen está rodando!"
+
+@app.route('/health')
+def health():
+    return "✅ Online!"
+
+def run_web():
+    app.run(host='0.0.0.0', port=8000)
+
+# ========== CONFIGURAÇÃO DO BOT ==========
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 
-# Conectar ao banco de dados
+# ========== BANCO DE DADOS ==========
 def get_db():
     conn = sqlite3.connect('entregas.db')
     conn.row_factory = sqlite3.Row
     return conn
 
-# Criar tabela se não existir
 def init_db():
     conn = get_db()
     conn.execute('''
@@ -30,7 +45,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Comando para adicionar entrega
+# ========== COMANDOS DO BOT ==========
 @bot.command()
 async def add(ctx, disciplina, atividade, data_entrega):
     try:
@@ -54,7 +69,6 @@ async def add(ctx, disciplina, atividade, data_entrega):
     except ValueError:
         await ctx.send("❌ Formato de data inválido! Use: YYYY-MM-DD")
 
-# Comando para listar entregas
 @bot.command()
 async def listar(ctx):
     conn = get_db()
@@ -80,7 +94,6 @@ async def listar(ctx):
     
     await ctx.send(mensagem)
 
-# Comando para marcar como entregue
 @bot.command()
 async def entregue(ctx, id_entrega: int):
     conn = get_db()
@@ -98,7 +111,7 @@ async def entregue(ctx, id_entrega: int):
     
     conn.close()
 
-# Tarefa de lembrete automático
+# ========== LEMBRETE AUTOMÁTICO ==========
 @tasks.loop(hours=24)
 async def alerta_diario():
     await bot.wait_until_ready()
@@ -123,12 +136,18 @@ async def alerta_diario():
                     f"📅 Data: {entrega['data_entrega']}"
                 )
 
-# Evento quando o bot ficar online
+# ========== EVENTOS ==========
 @bot.event
 async def on_ready():
     print(f'✅ Bot conectado como {bot.user}')
     init_db()
     alerta_diario.start()
 
-# Iniciar o bot
-bot.run(os.getenv('DISCORD_TOKEN'))
+# ========== INICIAR TUDO ==========
+if __name__ == "__main__":
+    # Inicia servidor web em thread separada
+    web_thread = threading.Thread(target=run_web, daemon=True)
+    web_thread.start()
+    
+    # Inicia o bot Discord
+    bot.run(os.getenv('DISCORD_TOKEN'))
