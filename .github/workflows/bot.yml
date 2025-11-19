@@ -1,0 +1,28 @@
+name: Lembretes de Entregas
+on:
+  schedule:
+    # Roda todos os dias às 10h da manhã
+    - cron: '0 10 * * *'
+  # Também roda quando você faz push (para testar)
+  push:
+    branches: [ main ]
+
+jobs:
+  check-entregas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install requests
+
+      - name: Verificar entregas e enviar alertas
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python check_entregas.py
