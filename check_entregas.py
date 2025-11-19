@@ -73,7 +73,11 @@ def enviar_webhook(mensagens):
         )
         
         if response.status_code == 204:
-            print(f"✅ Mensagem enviada: {mensagem['embeds'][0]['fields'][1]['value']}")
+            # Verifica se é mensagem com fields ou mensagem simples
+            if 'fields' in mensagem['embeds'][0]:
+                print(f"✅ Lembrete enviado: {mensagem['embeds'][0]['fields'][1]['value']}")
+            else:
+                print(f"✅ Mensagem de status enviada")
         else:
             print(f"❌ Erro ao enviar: {response.status_code}")
 
@@ -87,7 +91,7 @@ if __name__ == "__main__":
     else:
         print("✅ Nenhuma entrega próxima encontrada.")
         
-        # Mensagem de "tudo em dia"
+        # Mensagem de "tudo em dia" - SEM FIELDS
         mensagem_tudo_ok = {
             "embeds": [{
                 "title": "🎉 TUDO EM DIA!",
