@@ -24,7 +24,7 @@ def check_entregas():
         )
     ''')
     
-    # Verificar entregas próximas (5 dias ou menos)
+    # Verificar entregas próximas (14 dias ou menos)
     hoje = date.today()
     cursor.execute(
         'SELECT * FROM entregas WHERE date(data_entrega) >= date(?) ORDER BY data_entrega',
@@ -40,8 +40,8 @@ def check_entregas():
         data_entrega = datetime.strptime(entrega['data_entrega'], '%Y-%m-%d').date()
         dias_restantes = (data_entrega - hoje).days
         
-        if dias_restantes <= 5:  # Alertar para entregas em até 5 dias
-            cor = 0xFF0000 if dias_restantes <= 1 else 0xFFA500 if dias_restantes <= 3 else 0xFFFF00
+        if dias_restantes <= 14:  # Alertar para entregas em até 14 dias
+            cor = 0xFF0000 if dias_restantes <= 3 else 0xFFA500 if dias_restantes <= 7 else 0xFFFF00
             
             mensagem = {
                 "embeds": [{
