@@ -5,6 +5,7 @@ from datetime import datetime, date
 import os
 from flask import Flask
 import threading
+from datetime import time  
 
 # ========== SERVIDOR WEB PARA O RENDER ==========
 app = Flask(__name__)
@@ -112,7 +113,7 @@ async def entregue(ctx, id_entrega: int):
     conn.close()
 
 # ========== LEMBRETE AUTOMÁTICO ==========
-@tasks.loop(hours=24)
+@tasks.loop(time=datetime.time(hour=10, minute=0))  # 10h da manhã
 async def alerta_diario():
     await bot.wait_until_ready()
     
