@@ -14,6 +14,12 @@ def add_entrega(disciplina, atividade, data_entrega, user_id="karen"):
     conn.close()
     print(f"✅ {atividade} adicionada!")
 
-# Exemplo de uso:
+# EXEMPLOS - ADICIONE SUAS MATÉRIAS AQUI:
 if __name__ == "__main__":
-    add_entrega("Pipeline 3D", "Cena final", "2025-11-25")
+    add_entrega("Teorias da Criatividade", "Atividades e prova", "2025-12-01")
+    add_entrega("Análise de Cenários para Projetos", "Atividades e prova", "2025-12-10")
+    add_entrega("História da Arte", "Atividades e prova", "2025-12-10")
+    add_entrega("Linguagem e História da Arte", "Atividades e prova", "2025-12-10")
+    add_entrega("Gestão e Inovação", "Atividades e prova", "2025-12-10")
+    
+    print("🎯 Entregas adicionadas com sucesso!")
