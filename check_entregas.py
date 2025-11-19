@@ -24,7 +24,26 @@ def check_entregas():
         )
     ''')
     
-    # Verificar entregas próximas (14 dias ou menos)
+    # VERIFICAR se está vazio e adicionar entregas AUTOMATICAMENTE
+    cursor.execute('SELECT COUNT(*) FROM entregas')
+    if cursor.fetchone()[0] == 0:
+        print("📝 Banco vazio - adicionando entregas automaticamente...")
+        entregas_exemplo = [
+            ('Teorias da Criatividade', 'Atividades e prova', '2025-12-01', 'karen'),
+            ('Análise de Cenários para Projetos', 'Atividades e prova', '2025-12-10', 'karen'),
+            ('História da Arte', 'Atividades e prova', '2025-12-10', 'karen'),
+            ('Linguagem e História da Arte', 'Atividades e prova', '2025-12-10', 'karen'),
+            ('Gestão e Inovação', 'Atividades e prova', '2025-12-10', 'karen')
+        ]
+        
+        cursor.executemany(
+            'INSERT INTO entregas (disciplina, atividade, data_entrega, user_id) VALUES (?, ?, ?, ?)',
+            entregas_exemplo
+        )
+        conn.commit()
+        print("✅ 5 entregas adicionadas automaticamente!")
+    
+    # Verificar entregas próximas (5 dias ou menos)
     hoje = date.today()
     cursor.execute(
         'SELECT * FROM entregas WHERE date(data_entrega) >= date(?) ORDER BY data_entrega',
@@ -40,8 +59,8 @@ def check_entregas():
         data_entrega = datetime.strptime(entrega['data_entrega'], '%Y-%m-%d').date()
         dias_restantes = (data_entrega - hoje).days
         
-        if dias_restantes <= 14:  # Alertar para entregas em até 14 dias
-            cor = 0xFF0000 if dias_restantes <= 3 else 0xFFA500 if dias_restantes <= 7 else 0xFFFF00
+        if dias_restantes <= 5:  # Alertar para entregas em até 5 dias
+            cor = 0xFF0000 if dias_restantes <= 1 else 0xFFA500 if dias_restantes <= 3 else 0xFFFF00
             
             mensagem = {
                 "embeds": [{
