@@ -10,7 +10,6 @@ WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 ENTREGAS = [
     {"disciplina": "Teorias da Criatividade", "atividade": "Atividades avaliativas (4 unidades) e prova", "data_entrega": "2025-12-01"},
     {"disciplina": "Gestão e Inovação", "atividade": "Atividades avaliativas (6 unidades) e prova", "data_entrega": "2025-12-01"},
-    {"disciplina": "Roteiro e Narrativa", "atividade": "Reabertura para atividade", "data_entrega": "2025-12-05"},
     {"disciplina": "Análise de Cenários para Projetos", "atividade": "Atividades (3 unidades) e prova", "data_entrega": "2025-12-10"},
     {"disciplina": "História da Arte", "atividade": "Atividades (3 unidades) e prova", "data_entrega": "2025-12-10"},
     {"disciplina": "Língua Brasileira de Sinais", "atividade": "Atividades (4 unidades) e prova", "data_entrega": "2025-12-10"},
