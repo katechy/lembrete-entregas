@@ -9,6 +9,8 @@ WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 # LISTA DIRETA das suas entregas - EDITAVE AQUI! ✏️
 ENTREGAS = [
 
+]
+
 
 def check_entregas():
     mensagens = []
