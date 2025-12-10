@@ -8,11 +8,7 @@ WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 
 # LISTA DIRETA das suas entregas - EDITAVE AQUI! ✏️
 ENTREGAS = [
-    {"disciplina": "Análise de Cenários para Projetos", "atividade": "Atividades (3 unidades) e prova", "data_entrega": "2025-12-10"},
-    {"disciplina": "História da Arte", "atividade": "Atividades (3 unidades) e prova", "data_entrega": "2025-12-10"},
-    {"disciplina": "Língua Brasileira de Sinais", "atividade": "Atividades (4 unidades) e prova", "data_entrega": "2025-12-10"},
-    {"disciplina": "Linguagem e História da Arte", "atividade": "Atividades (4 unidades) e prova", "data_entrega": "2025-12-10"}
-]
+
 
 def check_entregas():
     mensagens = []
