@@ -8,7 +8,6 @@ WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 
 # LISTA DIRETA das suas entregas - EDITAVE AQUI! ✏️
 ENTREGAS = [
-    {"disciplina": "Gestão de Projetos", "atividade": "Atividades e prova", "data_entrega": "2026-03-01"},
     {"disciplina": "Tópicos Especiais em Design de Animação I", "atividade": "Atividades e prova", "data_entrega": "2026-06-01"},
     {"disciplina": "Temas Transversais", "atividade": "Atividades e prova", "data_entrega": "2026-06-16"},
     {"disciplina": "Projeto Integrado em Design de Animação Game", "atividade": "Projeto", "data_entrega": "2026-05-25"},
