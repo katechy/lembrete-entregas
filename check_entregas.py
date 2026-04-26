@@ -11,7 +11,6 @@ ENTREGAS = [
     {"disciplina": "Tópicos Especiais em Design de Animação I", "atividade": "Atividades e prova", "data_entrega": "2026-06-01"},
     {"disciplina": "Temas Transversais", "atividade": "Atividades e prova", "data_entrega": "2026-06-16"},
     {"disciplina": "Projeto Integrado em Design de Animação Game", "atividade": "Projeto", "data_entrega": "2026-05-25"},
-    {"disciplina": "Motion Design", "atividade": "Atividades e Prova", "data_entrega": "2026-05-01"},
     {"disciplina": "Linguagem Fotográfica", "atividade": "Atividades e Prova", "data_entrega": "2026-06-01"},
     {"disciplina": "Design Sustentável e Responsabilidade Social", "atividade": "Atividades e Prova", "data_entrega": "2026-06-01"},
     {"disciplina": "Estética e Linguagem Audiovisual", "atividade": "Atividades e Prova", "data_entrega": "2026-06-01"},
